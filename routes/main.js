@@ -230,17 +230,19 @@ exports.doCustomerLogin = function(req, res){
 	var customerId=req.body.customerId;
 	var password=encryption.encrypt(req.body.password);
 	var json_response;
-
+	console.log("ajay");
 	var getAccountDetails= "SELECT APPROVED_CUST,EMAIL_ID,CUST_ID FROM CUSTOMER WHERE PASSWORD='"+password+"' AND CUST_ID='"+customerId+"' OR EMAIL_ID='"+customerId+"';";
 	// checking for any existing farmer account
 	mysql.fetchData(function(err, getAccountDetailsResult){
 		if (err) {
 			throw err;
 		} else{
+			console.log("ajay1");
 			if (getAccountDetailsResult.length > 0) {
 				req.session.emailId=getAccountDetailsResult[0].EMAIL_ID;
 				req.session.customerId=getAccountDetailsResult[0].CUST_ID;
 				if(getAccountDetailsResult[0].APPROVED_CUST){
+					console.log("ajay2");
 					json_response={"customerLoginStatus":"SuccesfulLogin"};
 					res.send(json_response);
 				}
