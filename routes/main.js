@@ -244,7 +244,7 @@ exports.doCustomerLogin = function(req, res){
 				if(getAccountDetailsResult[0].APPROVED_CUST){
 					console.log("ajay2");
 					json_response={"customerLoginStatus":"SuccesfulLogin"};
-					res.send(json_response);
+					res.status(200).json(json_response);
 				}
 				else{
 					json_response={"customerLoginStatus":"pending"};
